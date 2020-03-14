@@ -119,14 +119,14 @@
     console.log(immutableString)
     // returns "I am immutable, but I can be appended and form a new object"
     ```
-    On appending the "immutableString" with a string value, following events occur:
+    On appending the `immutableString` with a string value, following events occur:
 
-      - Existing value of "immutableString" is retrieved
+      - Existing value of `immutableString` is retrieved
       - ", but I can be appended and form a new object" is appended to the existing value of "immutableString"
       - The resultant value is then allocated to a new block of memory
-      - "immutableString" object now points to the newly created memory space
+      - `immutableString` object now points to the newly created memory space
       - Previously created memory space is now available for garbage collection.
-      
+
 30. What are the pros and cons of immutability?
 31. How can you achieve immutability in your own code?
 32. Explain the difference between synchronous and asynchronous functions.
