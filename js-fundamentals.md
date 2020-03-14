@@ -68,6 +68,18 @@
 8. What language constructions do you use for iterating over object properties and array items?
 9. Can you describe the main difference between the Array.forEach() loop and Array.map() methods and why you would pick one versus the other?
 10. What's a typical use case for anonymous functions?
+  - IIFE (Immediate Invoked Function Expression): 
+    ```
+    (function() {
+      eat()
+      sleep()
+      repeat()
+     })() // inspired by one of Adrian's T-shirt :D
+    ```
+  - make code simpler (esp for callback functions): 
+    ```
+    const outputArr = inputArr.map(() => doSomething)
+    ```
 11. What's the difference between host objects and native objects?
 12. Explain the difference between: function Person(){}, var person = Person(), and var person = new Person()?
 13. Explain the differences on the usage of foo between function foo() {} and var foo = function() {}
