@@ -39,7 +39,7 @@
 7. What is a closure, and how/why would you use one?
 
   - a **closure** "is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function’s scope from an inner function." [MDN]
-    - in plain English: it is a function nested inside another function that closes over a variable declared in the outside function 
+    - in plain English: it is a function nested inside another function that closes over a variable declared in the outer function 
     - *example* (**an actual Q from a fintech company**)
       ```
       function createNext() { 
@@ -62,9 +62,9 @@
         console.log(next()) // 4
       
       ```
-      - `createNext()`: outside function
-      - `successor()`: inside function; also called a closure; closes over variable `a`, which is declared in the scope of the outside function but outside the scope of the inside function 
-
+      - `createNext()`: outer function
+      - `successor()`: inner function; also called a closure; closes over variable `a`, which is declared in the scope of the outer function but outside the scope of the inner function 
+    - *why*: closures are the primary mechanism used to enable data privacy. When you use closures for data privacy, the enclosed variables are only in scope within the containing (outer) function. You can’t get at the data from an outside scope except through the object’s privileged methods. In JavaScript, any method defined within the closure scope is privileged (i.e., any method defined inside a closure `successor()` in the above example, can have access to the varaibles in the outer function `createNext()`)
 8. What language constructions do you use for iterating over object properties and array items?
 9. Can you describe the main difference between the Array.forEach() loop and Array.map() methods and why you would pick one versus the other?
 10. What's a typical use case for anonymous functions?
