@@ -23,17 +23,48 @@
       ``` 
       let a = null
       let b = undefined 
+
       console.log(a) // returns null
       console.log(b) // returns undefined
       console.log(typeof a) // returns object
       console.log(typeof b) // returns undefined
+
       null === undefined // returns false
       null == undefined // returns true
       ```
 
 
 6. How would you go about checking for any of these states?
+
 7. What is a closure, and how/why would you use one?
+
+  - a **closure** "is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function’s scope from an inner function." [MDN]
+    - in plain English: it is a function nested inside another function that closes over a variable declared in the outside function 
+    - *example* (**an actual Q from a fintech company**)
+      ```
+      function createNext() { 
+            let a = 0
+            return function successor() {
+              a = a + 1
+              return a
+          }
+        }
+
+        const next = createNext()
+
+        console.log(next()) // 1
+        console.log(next()) // 2
+        console.log(next()) // 3
+
+        const next2 = createNext()
+
+        console.log(next2()) // 1
+        console.log(next()) // 4
+      
+      ```
+      - `createNext()`: outside function
+      - `successor()`: inside function; also called a closure; closes over variable `a`, which is declared in the scope of the outside function but outside the scope of the inside function 
+
 8. What language constructions do you use for iterating over object properties and array items?
 9. Can you describe the main difference between the Array.forEach() loop and Array.map() methods and why you would pick one versus the other?
 10. What's a typical use case for anonymous functions?
