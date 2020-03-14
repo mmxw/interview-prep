@@ -12,9 +12,10 @@
       - In the global execution context (outside of any function), `this` refers to the global object whether in strict mode or not.  
 
 
-3. Can you give an example of one of the ways that working with this has changed in ES6?
+3. Can you give an example of one of the ways that working with `this` has changed in ES6?
 
 4. Explain how prototypal inheritance works.
+
 5. What's the difference between a variable that is: null, undefined or undeclared?
 
 6. How would you go about checking for any of these states?
