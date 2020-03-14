@@ -17,6 +17,20 @@
 4. Explain how prototypal inheritance works.
 
 5. What's the difference between a variable that is: null, undefined or undeclared?
+    - `null` is an empty or non-existent value. 
+    - `undefined` means a variable has been declared but has not yet been assigned a value
+    - "undeclared" is a variable that has not been declared. 
+      ``` 
+      let a = null
+      let b = undefined 
+      console.log(a) // returns null
+      console.log(b) // returns undefined
+      console.log(typeof a) // returns object
+      console.log(typeof b) // returns undefined
+      null === undefined // returns false
+      null == undefined // returns true
+      ```
+
 
 6. How would you go about checking for any of these states?
 7. What is a closure, and how/why would you use one?
