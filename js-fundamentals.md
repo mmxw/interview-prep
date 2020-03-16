@@ -1,5 +1,7 @@
+*currently solved:* 1, 2, 5, 7, 10, 13, 28, 29
+
 1. **Explain event delegation.**
-Attaching event listeners to parent node, instead of every child, present or newly created, is event delegation. It makes use of event bubbling, where the event on a child bubbles up to the parent. So instead of adding an event listener to a child, and adding one every time a new child is added, we add the listener on parent.
+Attaching event listeners to parent node, instead of every child, present or newly created, is event delegation. It makes use of event bubbling (*see 18 & 19 for event bubbling and capturing*), where the event on a child bubbles up to the parent. So instead of adding an event listener to a child, and adding one every time a new child is added, we add the listener on parent.
 example from [this blog post](https://davidwalsh.name/event-delegate):
     ```html
     <ul id="parent-list">
@@ -146,6 +148,7 @@ example from [this blog post](https://davidwalsh.name/event-delegate):
     - *why*: closures are the primary mechanism used to enable data privacy. When you use closures for data privacy, the enclosed variables are only in scope within the containing (outer) function. You can’t get at the data from an outside scope except through the object’s privileged methods. In JavaScript, any method defined within the closure scope is privileged (i.e., any method defined inside a closure `successor()` in the above example, can have access to the varaibles in the outer function `createNext()`)
 8. What language constructions do you use for iterating over object properties and array items?
 
+
 9. Can you describe the main difference between the Array.forEach() loop and Array.map() methods and why you would pick one versus the other?
 
 10. **What's a typical use case for anonymous functions?**
@@ -190,8 +193,44 @@ example from [this blog post](https://davidwalsh.name/event-delegate):
 15. Explain Function.prototype.bind.
 16. What's the difference between feature detection, feature inference, and using the UA string?
 17. Explain "hoisting".
-18. Describe event bubbling.
-19. Describe event capturing.
+18. **Describe event bubbling**. 
+19. **Describe event capturing.**
+
+*three phases of event propogation:* 
+![](./3-phases-of-event-propogation.png)
+- The standard DOM Events describes 3 phases of event propagation:
+  - *Capturing phase* – the event goes down to the element. (top-down)
+  - *Target phase* – the event reached the target element. (on target)
+  - *Bubbling phase* – the event bubbles up from the element. (bottom-up)
+
+example: 
+```html
+<style>
+  body * {
+    margin: 10px;
+    border: 1px solid blue;
+  }
+</style>
+
+<form>FORM
+  <div>DIV
+    <p>P</p>
+  </div>
+</form>
+
+<script>
+  for(let elem of document.querySelectorAll('*')) {
+    elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), true);
+    elem.addEventListener("click", e => alert(`Bubbling: ${elem.tagName}`));
+  }
+</script>
+```
+- If you click on `<p>`, then the sequence is:
+
+  - `HTML` → `BODY` → `FORM` → `DIV` (capturing phase, the first listener); 4 pop-up alerts for capturing; 
+  - `P` (target phrase, triggers two times, as we’ve set two listeners: capturing and bubbling)
+  - `DIV` → `FORM` → `BODY` → `HTML` (bubbling phase, the second listener). 4 pop-up alerts for bubbling (in reverse order from the capturing)
+
 20. What's the difference between an "attribute" and a "property"?
 21. What are the pros and cons of extending built-in JavaScript objects?
 22. What is the difference between == and ===?
@@ -203,11 +242,11 @@ example from [this blog post](https://davidwalsh.name/event-delegate):
 
 
 
-28. Explain the difference between mutable and immutable objects.
+28. **Explain the difference between mutable and immutable objects.**
   - A **mutable** object is an object whose state can be modified after it is created. e.g. arrays and objects. 
   - **Immutables** are the objects whose state cannot be changed once the object is created. e.g. primitive data types (strings, numbers, boolean)
   
-29. What is an example of an immutable object in JavaScript?
+29. **What is an example of an immutable object in JavaScript?**
     ```js
     let immutableString = "I am immutable"
     immutableString = immutableString + ", but I can be appended and form a new object"
