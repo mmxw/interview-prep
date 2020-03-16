@@ -2,14 +2,75 @@
 
 2. **Explain how `this` works in JavaScript.**
   * runtime binding: 
-      - the value of `this` is determined by how a function is called. 
-      - it can't be set by assignment during execution, and could be different each time the function is called
-      - bind() in ES5: set the value of a function's `this` regardless of how it is called
-      - arrow function in ES5: doesn't have their own `this` binding, but retains the `this` value of the enclosing lexical context 
-  * strict vs. non-strict mode: 
-      - in non–strict mode, `this` is always a reference to an object 
-      - in strict mode `this` can be any value
-      - In the global execution context (outside of any function), `this` refers to the global object whether in strict mode or not.  
+      - It has different values depending on where it is used:
+
+        - In a method, this refers to the owner object.
+          ```js
+          const test1 = {
+            prop: 40, 
+            func: function() {
+              return this.prop
+            } // `this` refers to the object `test1`
+          }
+          console.log(test1.func()) // returns 40
+        - Alone, this refers to the global object.
+        ```js
+        console.log(this === window) // returns true in browser
+        console.log(this === global) // returns true in node
+        ```
+        - In a function, this refers to the global object.
+        ```js
+        function globalObj() {
+          return this
+        } 
+        console.log(globalObj()) // returns 'window' in browser, 'global' in node
+        ```
+        - In a function, in strict mode, this is undefined.
+        ```js
+        function globalObj() {
+          "use strict"
+          return this
+        } 
+        console.log(globalObj()) // returns undefined
+        ```
+        - In an event, this refers to the element that received - the event.
+        ```html
+          <button onclick="this.style.display='none'">
+            Click to Remove Me!
+          </button>
+          ```
+        - Methods like call(), and apply() can refer `this` to any object.
+        ```js
+        const person = {
+          fullName: function() {
+            return this.firstName + " " + this.lastName
+          }
+        }
+        const person1 = {
+          firstName:"John",
+          lastName: "Doe"
+        }
+        const person2 = {
+          firstName:"Mary",
+          lastName: "Doe"
+        }
+        person.fullName.call(person1) // returns John Doe
+        ```
+      - arrow function: doesn't have their own `this` binding, but retains the `this` value of the enclosing lexical context 
+        ```js
+          const test = {
+            name: 'test object',
+            createArrowFunction: function() {
+              return () => {
+                console.log(this.name)
+                console.log(arguments)
+              }
+            }
+          } 
+          test.createArrowFunction('hello', 'arrow function')
+          // returns "test object" {0: 'hello', 1: 'arrow function'}
+        ```
+
 
 
 3. Can you give an example of one of the ways that working with `this` has changed in ES6?
@@ -122,7 +183,7 @@
     On appending the `immutableString` with a string value, following events occur:
 
       - Existing value of `immutableString` is retrieved
-      - ", but I can be appended and form a new object" is appended to the existing value of "immutableString"
+      - ", but I can be appended and form a new object" is appended to the existing value of `immutableString`
       - The resultant value is then allocated to a new block of memory
       - `immutableString` object now points to the newly created memory space
       - Previously created memory space is now available for garbage collection.
