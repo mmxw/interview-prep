@@ -81,7 +81,7 @@
     - `null` is an empty or non-existent value. 
     - `undefined` means a variable has been declared but has not yet been assigned a value
     - "undeclared" is a variable that has not been declared. 
-      ``` 
+      ``` js
       let a = null
       let b = undefined 
 
@@ -102,7 +102,7 @@
   - a **closure** "is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function’s scope from an inner function." [MDN]
     - in plain English: it is a function nested inside another function that closes over a variable declared in the outer function 
     - *example* (**an actual Q from a fintech company**)
-      ```
+      ```js
       function createNext() { 
             let a = 0
             return function successor() {
@@ -131,7 +131,7 @@
 
 10. **What's a typical use case for anonymous functions?**
   - IIFE (Immediate Invoked Function Expression): 
-    ```
+    ```js
     (function() {
       eat()
       sleep()
@@ -139,7 +139,7 @@
      })() // inspired by one of Adrian's T-shirt :D
     ```
   - make code simpler (esp for callback functions): 
-    ```
+    ```js
     const outputArr = inputArr.map(() => doSomething)
     ```
 11. What's the difference between host objects and native objects?
@@ -149,7 +149,22 @@
   - ***constructor functions*** vs. ***classes***
 
 
-13. Explain the differences on the usage of foo between function foo() {} and var foo = function() {}
+13. **Explain the differences on the usage of `foo` between `let foo1 = function() {}` and `function foo2() {}`**
+
+  ```js
+    let foo1 = function() {
+      return 'function expression'
+    } // gets evaluated second
+    function foo2() {
+      return 'function declaration'
+    } //gets evaluated first
+    console.log(foo1())
+    console.log(foo2())
+  ```
+  - `let foo1 = function() {}`: Function expressions are evaluated as part of the step-by-step code, at the point where they appear (just like any other expression). That one creates a function with no name, which it assigns to the foo variable.
+  - `function foo2() {}`: Function declarations are evaluated upon entry into the enclosing scope, before any step-by-step code is executed. The function's name (foo) is added to the enclosing scope (technically, the variable object for the execution context the function is defined in).
+  
+  [see visualization here for what gets evaluated first](http://pythontutor.com/javascript.html#code=let%20foo1%20%3D%20function%28%29%20%7B%0A%20%20return%20'function%20expression'%0A%7D%0A%0Afunction%20foo2%28%29%20%7B%0A%20%20return%20'function%20declaration'%0A%7D%0A%0Aconsole.log%28foo1%28%29%29%0Aconsole.log%28foo2%28%29%29%0A%0A&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D)
 
 14. Can you explain what Function.call and Function.apply do? What's the notable difference between the two?
 
