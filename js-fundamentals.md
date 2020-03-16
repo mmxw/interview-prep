@@ -1,4 +1,28 @@
-1. Explain event delegation.
+1. **Explain event delegation.**
+Attaching event listeners to parent node, instead of every child, present or newly created, is event delegation. It makes use of event bubbling, where the event on a child bubbles up to the parent. So instead of adding an event listener to a child, and adding one every time a new child is added, we add the listener on parent.
+example from [this blog post](https://davidwalsh.name/event-delegate):
+    ```html
+    <ul id="parent-list">
+      <li id="post-1">Item 1</li>
+      <li id="post-2">Item 2</li>
+      <li id="post-3">Item 3</li>
+      <li id="post-4">Item 4</li>
+      <li id="post-5">Item 5</li>
+      <li id="post-6">Item 6</li>
+    </ul>
+    ```
+
+    ```js
+    // Get the element, add a click listener...
+    document.getElementById("parent-list").addEventListener("click", function(e) {
+      // e.target is the clicked element!
+      // If it was a list item
+      if(e.target && e.target.nodeName == "li") {
+        // List item found!  Output the ID!
+        console.log("List item ", e.target.id.replace("post-", ""), " was clicked!")
+      }
+    })
+    ```
 
 2. **Explain how `this` works in JavaScript.**
   * runtime binding: 
@@ -70,9 +94,6 @@
           test.createArrowFunction('hello', 'arrow function')
           // returns "test object" {0: 'hello', 1: 'arrow function'}
         ```
-
-
-
 3. Can you give an example of one of the ways that working with `this` has changed in ES6?
 
 4. Explain how prototypal inheritance works.
@@ -93,8 +114,6 @@
       null === undefined // returns false
       null == undefined // returns true
       ```
-
-
 6. How would you go about checking for any of these states?
 
 7. **What is a closure, and how/why would you use one?**
@@ -120,13 +139,13 @@
         const next2 = createNext()
 
         console.log(next2()) // 1
-        console.log(next()) // 4
-      
+        console.log(next()) // 4     
       ```
       - `createNext()`: outer function
       - `successor()`: inner function; also called a closure; closes over variable `a`, which is declared in the scope of the outer function but outside the scope of the inner function 
     - *why*: closures are the primary mechanism used to enable data privacy. When you use closures for data privacy, the enclosed variables are only in scope within the containing (outer) function. You can’t get at the data from an outside scope except through the object’s privileged methods. In JavaScript, any method defined within the closure scope is privileged (i.e., any method defined inside a closure `successor()` in the above example, can have access to the varaibles in the outer function `createNext()`)
 8. What language constructions do you use for iterating over object properties and array items?
+
 9. Can you describe the main difference between the Array.forEach() loop and Array.map() methods and why you would pick one versus the other?
 
 10. **What's a typical use case for anonymous functions?**
@@ -189,7 +208,7 @@
   - **Immutables** are the objects whose state cannot be changed once the object is created. e.g. primitive data types (strings, numbers, boolean)
   
 29. What is an example of an immutable object in JavaScript?
-    ```
+    ```js
     let immutableString = "I am immutable"
     immutableString = immutableString + ", but I can be appended and form a new object"
     console.log(immutableString)
