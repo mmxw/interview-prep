@@ -1,4 +1,4 @@
-*currently solved:* 1, 2, 5, 7, 10, 13, 28, 29
+*currently solved:* 1, 2, 5, 7, 10, 13, 18, 19, 28, 29
 
 1. **Explain event delegation.**
 Attaching event listeners to parent node, instead of every child, present or newly created, is event delegation. It makes use of event bubbling (*see 18 & 19 for event bubbling and capturing*), where the event on a child bubbles up to the parent. So instead of adding an event listener to a child, and adding one every time a new child is added, we add the listener on parent.
@@ -65,7 +65,7 @@ example from [this blog post](https://davidwalsh.name/event-delegate):
             Click to Remove Me!
           </button>
           ```
-        - Methods like call(), and apply() can refer `this` to any object.
+        - Methods like call(), and apply() can refer `this` to any object. (*see 14 for `call()` and `apply()`)
         ```js
         const person = {
           fullName: function() {
@@ -188,10 +188,30 @@ example from [this blog post](https://davidwalsh.name/event-delegate):
   
   [see visualization here for what gets evaluated first](http://pythontutor.com/javascript.html#code=let%20foo1%20%3D%20function%28%29%20%7B%0A%20%20return%20'function%20expression'%0A%7D%0A%0Afunction%20foo2%28%29%20%7B%0A%20%20return%20'function%20declaration'%0A%7D%0A%0Aconsole.log%28foo1%28%29%29%0Aconsole.log%28foo2%28%29%29%0A%0A&curInstr=0&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D)
 
-14. Can you explain what Function.call and Function.apply do? What's the notable difference between the two?
+14. **Can you explain what Function.call and Function.apply do? What's the notable difference between the two**
+  - Both are used to set the value of this explicitly. 
+    - While call takes a list of arguments in comma separated format
+    - apply takes an array with list of arguments.
+    ```js
+      const person = {
+        fullName: function() {
+          return this.firstName + " " + this.lastName
+        }
+      }
+      const person1 = {
+        firstName:"John",
+        lastName: "Doe"
+      }
+      const person2 = ['Mary', 'Doe']
+
+      person.fullName.call(person1) // returns John Doe
+      person.fullName.apply(person2) // returns Mary Doe
+    ```
 
 15. Explain Function.prototype.bind.
+
 16. What's the difference between feature detection, feature inference, and using the UA string?
+
 17. Explain "hoisting".
 18. **Describe event bubbling**. 
 19. **Describe event capturing.**
