@@ -1,4 +1,4 @@
-*currently solved:* 1, 2, 5, 7, 10, 13, 18, 19, 28, 29
+*currently solved:* 1, 2, 5, 7, 10, 13, 14, 18, 19, 28, 29
 
 1. **Explain event delegation.**
 Attaching event listeners to parent node, instead of every child, present or newly created, is event delegation. It makes use of event bubbling (*see 18 & 19 for event bubbling and capturing*), where the event on a child bubbles up to the parent. So instead of adding an event listener to a child, and adding one every time a new child is added, we add the listener on parent.
@@ -252,6 +252,27 @@ example:
   - `DIV` → `FORM` → `BODY` → `HTML` (bubbling phase, the second listener). 4 pop-up alerts for bubbling (in reverse order from the capturing)
 
 20. What's the difference between an "attribute" and a "property"?
+- Attributes – is what’s written in HTML.
+- Properties – is what’s in DOM objects.
+
+ -- | Properties |	Attributes
+--- | --- | --- 
+Type| Any value, standard properties have types described in the spec | A string
+Name |	Name is case-sensitive	| Name is not case-sensitive
+
+for example: 
+- this HTML element: `<input type="text" value="Name:"> ` has two attributes: `type` and `value`
+- 
+
+`elem.hasAttribute(name)` – to check for existence.
+`elem.getAttribute(name)` – to get the value.
+`elem.setAttribute(name, value)` – to set the value.
+`elem.removeAttribute(name)` – to remove the attribute.
+`elem.attributes` is a collection of all attributes.
+
+
+
+
 21. What are the pros and cons of extending built-in JavaScript objects?
 22. What is the difference between == and ===?
 23. Explain the same-origin policy with regards to JavaScript.
@@ -285,6 +306,7 @@ example:
 31. How can you achieve immutability in your own code?
 32. Explain the difference between synchronous and asynchronous functions.
 33. What is event loop?
+
 34. What is the difference between call stack and task queue?
 35. What are the differences between variables created using let, var or const?
 36. What are the differences between ES6 class and ES5 function constructors?
